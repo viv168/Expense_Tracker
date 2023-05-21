@@ -1,0 +1,69 @@
+{% extends 'base_auth.html' %} 
+{% block title %}
+  Register
+{% endblock %}
+{% block content %}
+{% load static %}
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card text-center mt-5">
+      <div class="card-title ">
+        <h4 class="card-text mt-5">Register for a free account</h4>
+      </div>
+
+      <div class="card-body">
+        <form action="{% url 'register' %}" method="post">{% csrf_token %}
+            {% include 'partials/_messages.html'   %}
+            <div class="form-group">
+              <input
+              class="form-control mt-3"
+                type="text"
+                name="username"
+                placeholder="Username"
+                id="usernameField"
+                class="form-control form-control-sm"
+                value="{{fieldValues.username}}"
+              />
+            </div>
+            <div class="invalid-feedback" style="display: none;"></div>
+            <p class="text-sm text-success usernameSuccessOutput"></p>
+            <div class="form-group">
+              <input
+              class="form-control mt-3"
+                type="email"
+                name="email"
+                placeholder="Email"
+                id="emailField"
+                class="form-control form-control-sm"
+                value="{{fieldValues.email}}"
+              />
+            </div>
+            <div class="emailFeedbackArea invalid-feedback" style="display: none;"></div>
+
+            <div class="form-group">
+              <input
+              class="form-control mt-3"
+                type="password"
+                name="password"
+                placeholder="Password"
+                id="passwordField"
+                class="form-control form-control-sm"
+              />
+            </div>
+            <small class="float-end py-3 showPasswordToggle">SHOW</small>
+            <input class="btn btn-primary form-control mt-3 submit-btn" type="submit" value="Register"/>
+          </form>
+      </div>
+      <span class="text-lead lead mb-2">Already have an account?<a href="{% url 'login' %}">   Login</a></span>
+      <span class="text-lead lead">Forgot password?<a href="{% url 'request-password' %}">   Reset</a></span>
+      <br>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock %}
